@@ -1,0 +1,21 @@
+{
+  "name": "boss-apply",
+  "version": "1.0.0",
+  "description": "boss自动求职chrome插件",
+  "main": "content-script.js",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack --watch",
+    "build": "NODE_ENV=production webpack"
+  },
+  "author": "malqqin",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^6.4.1",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
+  }
+}

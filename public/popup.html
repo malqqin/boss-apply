@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #tip {
+            margin-bottom: 10px;
+        }
+
+        #container {
+            width: 220px;
+            height: 50PX;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            width: 100PX;
+            height: 30PX;
+            color: #fff;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            background-color: rgb(16, 86, 236);
+            border-radius: 15px;
+        }
+
+        .btn:active {
+            opacity: 0.7;
+        }
+
+        #stop {
+            background-color: rgb(235, 86, 86);
+        }
+    </style>
+</head>
+
+<body>
+    <input type="number" name="timeSpace" min="5" max="100" value="" id="timeSpace" style="width: 90%;"
+        placeholder="输入时间间隔(5-50之间)"></input>
+    <div id="container">
+        <button id="begin" class="btn">开始</button>
+        <button id="stop" class="btn">停止</button>
+    </div>
+    <!-- <div class="logs">logs</div> -->
+    <script src="./common/jquery-3.4.1.min.js"></script>
+    <script src="./popup.js"></script>
+</body>
+
+</html>

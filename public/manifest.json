@@ -1,0 +1,39 @@
+{
+    "manifest_version": 2,
+    "name": "zhilian-chrome-extention",
+    "version": "0.0.1",
+    "description": "智联招聘插件",
+    "browser_action": {
+        "default_icon": "assets/icon.png",
+        "default_title": "智联招聘插件",
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "assets/icon.png",
+        "48": "assets/icon.png",
+        "128": "assets/icon.png"
+    },
+    "permissions": [
+        "cookies",
+        "tabs",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "common/jquery-3.4.1.min.js",
+                "content-script.js"
+            ],
+            "matches": [
+                "*://rd6.zhaopin.com/*"
+            ],
+            "run_at": "document_end"
+        }
+    ]
+}
