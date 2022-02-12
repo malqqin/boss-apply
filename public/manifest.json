@@ -1,11 +1,11 @@
 {
     "manifest_version": 2,
-    "name": "zhilian-chrome-extention",
+    "name": "boss-apply",
     "version": "0.0.1",
-    "description": "智联招聘插件",
+    "description": "boss自动投简历插件",
     "browser_action": {
         "default_icon": "assets/icon.png",
-        "default_title": "智联招聘插件",
+        "default_title": "boss自动投简历插件",
         "default_popup": "popup.html"
     },
     "icons": {
@@ -31,7 +31,7 @@
                 "content-script.js"
             ],
             "matches": [
-                "*://rd6.zhaopin.com/*"
+                "*://www.zhipin.com/*"
             ],
             "run_at": "document_end"
         }

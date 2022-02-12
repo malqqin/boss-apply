@@ -7,12 +7,13 @@ const getEntry = (pathDir) => {
     let entries = {},
         filePath = pathDir || path.resolve(__dirname, './src');
     fs.readdirSync(filePath).forEach((filename) => {
-        states = fs.statSync(filePath + "/" + filename);
+        const states = fs.statSync(filePath + "/" + filename);
+        const combineDir = path.join(filePath, filename);
         if (!states.isDirectory() && /\.js/.test(filename)) {
             let enrtyKey = filename.split('.')[0];
-            entries[enrtyKey] = path.join(filePath, filename);
+            entries[enrtyKey] = combineDir;
         } else {
-            entries = Object.assign(entries, getEntry(pathDir));
+            entries = Object.assign(entries, getEntry(combineDir));
         }
     });
     return entries;
@@ -32,6 +33,9 @@ module.exports = {
                 test: /.js$/,
                 use: {
                     loader: 'babel-loader',
+                    options: {
+                        presets: ["@babel/preset-env"],
+                    },
                 }
             }
         ],

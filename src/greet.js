@@ -1,6 +1,8 @@
 
 import EventEmitter from "../public/common/eventEmitter"
 import { greetQueue } from "../public/common/eventQueue";
+import { companyList } from "./data/companyList"
+import { countDown } from "../public/common/util"
 export default class GreetTask {
     constructor() {
         this.timeSpace = 24 * 60 * 60 * 1000;
@@ -66,15 +68,52 @@ export default class GreetTask {
         let StartTimeStamp = this.getStartTimeStamp();
         let curStamp = new Date().getTime();
         let timeDiff = StartTimeStamp - curStamp;
-        this.countDown(timeDiff);
+        countDown(timeDiff);
     }
-    interValtask() {
+    timeResolve() {
+        let random = this.getMathRandom(1, 3);
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve()
+            }, 5000 * random);
+        })
+    }
+    getMathRandom(min, max) {
+        return Math.floor(Math.random(max - min + 1)) + min;
+    }
+    async interValtask() {
+        let random = this.getMathRandom(1, 3);
+        let list = $('.user-list').find('li');
         if (this.isGreetUrl()) {
-            const btnArray = this.getResumeBtnList();
-            this.greetTask(btnArray);
+            const greetList = this.getGreetList();
+            for (let g of greetList) {
+                // 防止账号被识别到恶意操作导致被封 。>5秒之行一下，>3秒延迟做一次点击
+                await this.timeResolve()
+                // console.log(g)
+                $(list)[g.index].scrollIntoView({ behavior: 'smooth' })
+                setTimeout(() => {
+                    $(list)[g.index].click()
+                }, 3000 * random);
+            }
+            // this.greetTask(greetList);
         } else {
-            // window.open("https://www.zhipin.com/web/geek/chat");
+            window.open("https://www.zhipin.com/web/geek/chat");
         }
+    }
+    getGreetList() {
+        let list = $('.user-list').find('li');
+        let res = []
+        $(list).each(function () {
+            const name = $(this).find('.gray').text();
+            const index = $(this).index();
+            for (let item of companyList) {
+                if (name.includes(item.name)) {
+                    res.push({ name, index })
+                }
+            }
+        });
+        console.log(res);
+        return res;
     }
     // 当前时间是否在任务开启时间
     openTask() {
@@ -84,20 +123,5 @@ export default class GreetTask {
     isGreetUrl() {
         const cUrl = "https://www.zhipin.com/web/geek/chat";
         return location.href.indexOf(cUrl) !== -1;
-    }
-    // 倒计时
-    countDown(timeNum) {
-        if (timeNum < 0) {
-            return
-        }
-        this.countDownTimer = setInterval(() => {
-            timeNum -= 1000;
-            console.log('timeNum:', timeNum)
-            if (timeNum <= 0) {
-                console.log('重新开始打招呼')
-                clearInterval(this.countDownTimer)
-                window.location.reload();
-            }
-        }, 1000);
     }
 }
