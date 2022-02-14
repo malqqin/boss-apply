@@ -17,6 +17,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            overflow: hidden
+        }
+
+        input {
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -41,6 +46,10 @@
 </head>
 
 <body>
+    <label for="taskStartTime">选择任务开始时间:</label>
+    <input type="datetime-local" name="taskStartTime" min="5" max="100" value="" id="taskStartTime" style="width: 90%;"
+        placeholder="选择开始执行时间，不选择默认立刻执行"></input>
+    <label for="timeSpace">选择任务时间间隔:</label>
     <input type="number" name="timeSpace" min="5" max="100" value="" id="timeSpace" style="width: 90%;"
         placeholder="输入时间间隔(5-50之间)"></input>
     <div id="container">

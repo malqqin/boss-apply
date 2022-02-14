@@ -1,15 +1,23 @@
-// 倒计时
-export const countDown = (timeNum) => {
+export const countDown = (timeNum, callBack) => {
     if (timeNum < 0) {
         return
     }
-    this.countDownTimer = setInterval(() => {
+    countDownTimer = setInterval(() => {
         timeNum -= 1000;
-        console.log('timeNum:', timeNum)
         if (timeNum <= 0) {
-            console.log('重新开始打招呼')
-            clearInterval(this.countDownTimer)
-            window.location.reload();
+            clearInterval(countDownTimer)
+            callBack();
         }
     }, 1000);
+}
+export const getStartTimeStamp = (timeStr) => {
+    let Year = new Date().getFullYear(),
+        Month = new Date().getMonth() + 1,
+        date = new Date().getDate(),
+        defualtTime = Year + '-' + Month + '-' + date,
+        timeStamp = new Date(timeStr ? timeStr : defualtTime).getTime();
+    return timeStamp
+}
+export const getMathRandom = (min, max) => {
+    return Math.floor(Math.random(max - min + 1)) + min;
 }
